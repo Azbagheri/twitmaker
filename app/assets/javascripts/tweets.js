@@ -2,7 +2,8 @@
 // All this logic will automatically be available in application.js.
 $(function(){
 
-  $('#create_tweet').click('submit', function(e){
+  $('#new_tweet').on('submit', function(e){
+
     e.preventDefault();
     $.ajax({
       url: $(this).attr('action'),
@@ -11,9 +12,10 @@ $(function(){
       dataType: 'html'
     }).done(function(data){
         $('.tweets').prepend(data);
+        $('#tweet_message').val(" ");
     }).fail(function(){
       console.log('Submit was not successful');
     }).always(function(){
     });
   });
-})
+});

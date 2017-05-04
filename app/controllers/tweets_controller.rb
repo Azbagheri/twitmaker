@@ -7,10 +7,22 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
 
-    if @tweet.save
-      redirect_to tweets_path
-    else
-      render :index
+    respond_to do |format|
+      format.html do
+        if request.xhr?
+          if @tweet.save
+            render partial: 'single_tweet', locals: {tweet: @tweet}
+          else
+            render :index
+          end
+        else
+          if @tweet.save
+            redirect_to tweets_path
+          else
+            render :index
+          end
+        end
+      end
     end
   end
 
