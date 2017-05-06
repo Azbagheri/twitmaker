@@ -1,10 +1,7 @@
 <ul class="tweets">
-  <% @tweets.each do |tweet| %>
-    <li class="tweet">
-      <p><%= tweet.message %></p>
-      <time><%= tweet.created_at.strftime('%b %e, %l:%M %p') %></time>
-    </li>
-  <% end %>
+   <% @tweets.each do |twit| %>
+    <%= render partial: 'single_tweet', locals: {tweet: twit}%>
+   <% end %>
 </ul>
 
 <%= form_for @tweet do |f| %>

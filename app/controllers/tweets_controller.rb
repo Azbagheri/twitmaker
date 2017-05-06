@@ -23,7 +23,15 @@ class TweetsController < ApplicationController
           end
         end
       end
-    end
+
+      format.json do
+        if @tweet.save
+          render json: @tweet
+        else
+          render :index
+        end
+      end
+    end  
   end
 
   def destroy
